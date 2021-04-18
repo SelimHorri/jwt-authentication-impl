@@ -10,6 +10,6 @@ public interface CredentialService {
 	Credential findById(final Integer id);
 	Credential save(final Credential credential);
 	Credential update(final Credential credential);
-	void delete(final Integer id);
+	void deleteById(final Integer id);
 	
 }

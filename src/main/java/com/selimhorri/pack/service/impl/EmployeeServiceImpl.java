@@ -16,7 +16,7 @@ import com.selimhorri.pack.service.EmployeeService;
 @Transactional
 public class EmployeeServiceImpl implements EmployeeService {
 	
-	private EmployeeRepository employeeRepository;
+	private final EmployeeRepository employeeRepository;
 	
 	@Autowired
 	public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
@@ -44,7 +44,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 	
 	@Override
-	public void delete(Integer id) {
+	public void deleteById(Integer id) {
 		this.employeeRepository.deleteById(id);
 	}
 	

@@ -16,7 +16,7 @@ import com.selimhorri.pack.service.CredentialService;
 @Transactional
 public class CredentialServiceImpl implements CredentialService {
 	
-	private CredentialRepository credentialRepository;
+	private final CredentialRepository credentialRepository;
 	
 	@Autowired
 	public CredentialServiceImpl(CredentialRepository credentialRepository) {
@@ -44,7 +44,7 @@ public class CredentialServiceImpl implements CredentialService {
 	}
 	
 	@Override
-	public void delete(Integer id) {
+	public void deleteById(Integer id) {
 		this.credentialRepository.deleteById(id);
 	}
 	

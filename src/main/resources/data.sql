@@ -8,7 +8,7 @@ INSERT INTO employees (fname, lname, email, image_url, hiredate) VALUES
 
 INSERT INTO credentials (username, password, role, is_enabled, employee_id) VALUES
 ('selimhorri', '0000', 'ROLE_ADMIN', true, 1),
-('omarderouiche', '0000', 'ROLE_USER', true, 2),
-('amineladjimi', '0000', 'ROLE_USER', true, 3);
+('omarderouiche', '0000', 'ROLE_EMP', true, 2),
+('amineladjimi', '0000', 'ROLE_EMP', true, 3);
 
 
