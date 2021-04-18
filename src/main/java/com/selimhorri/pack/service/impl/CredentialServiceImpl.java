@@ -6,6 +6,7 @@ import java.util.NoSuchElementException;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.selimhorri.pack.model.entity.Credential;
@@ -47,6 +48,13 @@ public class CredentialServiceImpl implements CredentialService {
 	public void deleteById(Integer id) {
 		this.credentialRepository.deleteById(id);
 	}
+	
+	@Override
+	public Credential findByUsername(final String username) {
+		return this.credentialRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("***** CREDENTIAL NOT FOUND ******"));
+	}
+	
+	
 	
 }
 

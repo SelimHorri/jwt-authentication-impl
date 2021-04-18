@@ -11,5 +11,6 @@ public interface CredentialService {
 	Credential save(final Credential credential);
 	Credential update(final Credential credential);
 	void deleteById(final Integer id);
+	Credential findByUsername(final String username);
 	
 }

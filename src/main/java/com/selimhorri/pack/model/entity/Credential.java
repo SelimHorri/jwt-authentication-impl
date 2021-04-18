@@ -109,11 +109,6 @@ public class Credential implements Serializable {
 	
 }
 
-enum Role {
-	ROLE_ADMIN,
-	ROLE_EMP
-}
-
 
 
 
