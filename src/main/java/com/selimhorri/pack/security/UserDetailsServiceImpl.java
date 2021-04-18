@@ -4,11 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.selimhorri.pack.service.CredentialService;
 
-@Component
+@Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 	
 	private final CredentialService credentialService;
