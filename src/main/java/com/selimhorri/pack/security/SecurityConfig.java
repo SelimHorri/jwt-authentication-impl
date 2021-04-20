@@ -8,18 +8,24 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import com.selimhorri.pack.config.filter.JwtRequestFilter;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	private final UserDetailsService userDetailsService;
+	private final JwtRequestFilter jwtRequestFilter;
 	
 	@Autowired
-	public SecurityConfig(UserDetailsService userDetailsService) {
+	public SecurityConfig(UserDetailsService userDetailsService, final JwtRequestFilter jwtRequestFilter) {
 		this.userDetailsService = userDetailsService;
+		this.jwtRequestFilter = jwtRequestFilter;
 	}
 	
 	@Override
@@ -33,7 +39,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 			.antMatchers("/app/authenticate").permitAll()
 			.antMatchers("/h2-console").permitAll()
-			.anyRequest().authenticated();
+			.anyRequest().authenticated()
+			.and()
+			.sessionManagement()
+			.sessionCreationPolicy(SessionCreationPolicy.STATELESS); // make it no session in security context
+		http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 	}
 	
 	@Bean
