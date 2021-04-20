@@ -24,7 +24,7 @@ public class JwtServiceImpl implements JwtService {
 	
 	@Override
 	public String extractUsername(final String token) {
-		return this.extractUsername(token);
+		return this.jwtUtil.extractUsername(token);
 	}
 	
 	@Override
