@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.selimhorri.pack.model.entity.Credential;
-import com.selimhorri.pack.model.entity.Employee;
 import com.selimhorri.pack.service.CredentialService;
 import com.selimhorri.pack.service.JwtService;
 
