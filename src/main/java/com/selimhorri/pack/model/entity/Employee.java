@@ -16,6 +16,8 @@ import javax.validation.constraints.Email;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "employees")
 public final class Employee implements Serializable {
@@ -43,6 +45,7 @@ public final class Employee implements Serializable {
 	@Column(name = "hiredate")
 	private LocalDate hiredate;
 	
+	@JsonIgnore
 	@OneToOne(mappedBy = "employee", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Credential credential;
 	
