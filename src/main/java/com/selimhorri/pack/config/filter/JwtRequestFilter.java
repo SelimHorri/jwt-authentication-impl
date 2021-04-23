@@ -21,11 +21,14 @@ import com.selimhorri.pack.service.JwtService;
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
 	
-	@Autowired
 	private UserDetailsService userDetailsService;
+	private JwtService jwtService;
 	
 	@Autowired
-	private JwtService jwtService;
+	public JwtRequestFilter(UserDetailsService userDetailsService, JwtService jwtService) {
+		this.userDetailsService = userDetailsService;
+		this.jwtService = jwtService;
+	}
 	
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {

@@ -24,14 +24,13 @@ import com.selimhorri.pack.service.JwtService;
 @RequestMapping("/app/api/credentials")
 public class CredentialResource {
 	
-	@Autowired
-	private JwtService jwtService;
-	
 	private final CredentialService credentialService;
+	private final JwtService jwtService;
 	
 	@Autowired
-	public CredentialResource(CredentialService credentialService) {
+	public CredentialResource(CredentialService credentialService, JwtService jwtService) {
 		this.credentialService = credentialService;
+		this.jwtService = jwtService;
 	}
 	
 	@GetMapping(value = {"", "/"})
