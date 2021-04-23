@@ -20,14 +20,16 @@ import com.selimhorri.pack.service.JwtService;
 @RequestMapping(value = {"/app/api/authenticate"})
 public class AuthenticationResource {
 	
-	@Autowired
 	private AuthenticationManager authenticationManager;
-	
-	@Autowired
 	private UserDetailsService userDetailsService;
+	private JwtService jwtService;
 	
 	@Autowired
-	private JwtService jwtService;
+	public AuthenticationResource(AuthenticationManager authenticationManager, UserDetailsService userDetailsService, JwtService jwtService) {
+		this.authenticationManager = authenticationManager;
+		this.userDetailsService = userDetailsService;
+		this.jwtService = jwtService;
+	}
 	
 	@PostMapping(value = {"", "/"})
 	public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody final AuthenticationRequest authenticationRequest) {

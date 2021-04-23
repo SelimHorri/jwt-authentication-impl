@@ -1,4 +1,14 @@
 <p>home works!</p>
 
 <br><br>
-<h4>{{jwt}}</h4>
+
+<!--<h1>{{jwt}}</h1>-->
+
+<div *ngFor="let e of employees" >
+  <h5>{{e?.fname}}</h5>
+  <h5>{{e?.lname}}</h5>
+  <h5>{{e?.email}}</h5>
+  <h5>{{e?.imageUrl}}</h5>
+  <h5>{{e?.hiredate | date}}</h5>
+</div>
+
