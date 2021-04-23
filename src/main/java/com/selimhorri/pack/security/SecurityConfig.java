@@ -3,6 +3,7 @@ package com.selimhorri.pack.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -34,9 +35,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(final HttpSecurity http) throws Exception {
-		http.csrf().disable()
+		http.cors().disable()
+			.csrf().disable()
 			.authorizeRequests()
-			.antMatchers("/app/authenticate").permitAll()
+			.antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+			.antMatchers("/app/api/authenticate").permitAll()
 			.antMatchers("/h2-console").permitAll()
 			.anyRequest().authenticated()
 			.and()

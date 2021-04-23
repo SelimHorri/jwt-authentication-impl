@@ -17,7 +17,7 @@ import com.selimhorri.pack.model.dto.AuthenticationResponse;
 import com.selimhorri.pack.service.JwtService;
 
 @RestController
-@RequestMapping(value = {"/app/authenticate"})
+@RequestMapping(value = {"/app/api/authenticate"})
 public class AuthenticationResource {
 	
 	@Autowired
