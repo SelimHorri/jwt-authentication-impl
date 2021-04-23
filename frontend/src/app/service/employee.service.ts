@@ -31,9 +31,7 @@ export class EmployeeService {
           headers: new HttpHeaders().set('Authorization', `Bearer ${response.jwt}`)
         }
         */
-        
         // console.log(httpHeaders.headers.get('Authorization'));
-        
         let httpHeaders = new HttpHeaders({
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${response.jwt}`

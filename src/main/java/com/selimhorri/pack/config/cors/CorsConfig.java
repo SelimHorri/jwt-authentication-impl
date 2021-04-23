@@ -64,7 +64,7 @@ public class CorsConfig {
 						.allowedOrigins("*")
 						.allowedMethods("*")
 						.allowedHeaders("*");
-				// WebMvcConfigurer.super.addCorsMappings(registry);
+				WebMvcConfigurer.super.addCorsMappings(registry);
 			}
 		};
 	}
