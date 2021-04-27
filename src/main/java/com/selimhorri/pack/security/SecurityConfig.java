@@ -40,12 +40,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 			.antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 			.antMatchers("/app/api/authenticate").permitAll()
-			.antMatchers("/h2-console").permitAll()
+			.antMatchers("/h2-console/**").permitAll()
 			.anyRequest().authenticated()
 			.and()
 			.sessionManagement()
 			.sessionCreationPolicy(SessionCreationPolicy.STATELESS); // make it no session in security context
 		http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+		http.headers().frameOptions().sameOrigin(); // for h2 
 	}
 	
 	@Bean

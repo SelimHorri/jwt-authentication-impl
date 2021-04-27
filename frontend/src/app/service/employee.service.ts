@@ -23,6 +23,10 @@ export class EmployeeService {
   
   public findAll(authenticationRequest: AuthenticationRequest): Observable<Employee[]> {
     
+    let httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    
     this.authenticationService.authenticate(authenticationRequest).subscribe(
       (response: AuthenticationResponse) => {
         
@@ -32,23 +36,20 @@ export class EmployeeService {
         }
         */
         // console.log(httpHeaders.headers.get('Authorization'));
-        let httpHeaders = new HttpHeaders({
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${response.jwt}`
-        });
         
-        httpHeaders = httpHeaders.set("Jwt-Token", "Bearer " + response.jwt);
         
-        return this.http.get<Employee[]>(this.apiUrl, {headers: httpHeaders});
+        httpHeaders = httpHeaders.set("Authorization", "Bearer " + response.jwt);
+        console.log(httpHeaders.get('Authorization'));
+        return this.http.get<Employee[]>(this.apiUrl, {headers: httpHeaders!});
       },
       (error: HttpErrorResponse) => {
         console.log(error.message);
-        alert(error.message);
-        return this.http.get<Employee[]>(this.apiUrl, { responseType: "json" });
+        alert("WTHHHHHHH");
+        return this.http.get<Employee[]>(this.apiUrl, { headers: httpHeaders });
       }
     );
     
-    return this.http.get<Employee[]>(this.apiUrl, {responseType: "json"});
+    return this.http.get<Employee[]>(this.apiUrl, { headers: httpHeaders });
   }
   
   public findById(id: number): Observable<Employee> {
