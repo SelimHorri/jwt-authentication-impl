@@ -14,6 +14,7 @@ import { AuthenticationService } from './authentication.service';
 export class EmployeeService {
   
   private apiUrl: string = environment.apiUrl;
+  private token!: string;
   
   constructor(
     private authenticationService: AuthenticationService,
@@ -23,31 +24,22 @@ export class EmployeeService {
   
   public findAll(authenticationRequest: AuthenticationRequest): Observable<Employee[]> {
     
-    let httpHeaders = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
-    
     this.authenticationService.authenticate(authenticationRequest).subscribe(
       (response: AuthenticationResponse) => {
         
-        /*
-        const httpHeaders = {
-          headers: new HttpHeaders().set('Authorization', `Bearer ${response.jwt}`)
-        }
-        */
-        // console.log(httpHeaders.headers.get('Authorization'));
+        this.token = response.jwt;
         
-        
-        httpHeaders = httpHeaders.set("Authorization", "Bearer " + response.jwt);
-        console.log(httpHeaders.get('Authorization'));
-        return this.http.get<Employee[]>(this.apiUrl, {headers: httpHeaders!});
       },
       (error: HttpErrorResponse) => {
         console.log(error.message);
         alert("WTHHHHHHH");
-        return this.http.get<Employee[]>(this.apiUrl, { headers: httpHeaders });
       }
     );
+    
+    let httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.token}`
+    });
     
     return this.http.get<Employee[]>(this.apiUrl, { headers: httpHeaders });
   }
