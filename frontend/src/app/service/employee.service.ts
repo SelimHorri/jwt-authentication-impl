@@ -27,7 +27,8 @@ export class EmployeeService {
     this.authenticationService.authenticate(authenticationRequest).subscribe(
       (response: AuthenticationResponse) => {
         
-        this.token = response.jwt;
+        this.token = response.jwt; // token contains the hash data expected
+        // console.log(this.token);
         
       },
       (error: HttpErrorResponse) => {
@@ -35,6 +36,8 @@ export class EmployeeService {
         alert("WTHHHHHHH");
       }
     );
+    
+    // console.log(this.token); token is null / undefined ?????
     
     let httpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
