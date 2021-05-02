@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.selimhorri.pack.model.entity.Credential;
@@ -18,10 +19,12 @@ import com.selimhorri.pack.service.CredentialService;
 public class CredentialServiceImpl implements CredentialService {
 	
 	private final CredentialRepository credentialRepository;
+	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@Autowired
-	public CredentialServiceImpl(CredentialRepository credentialRepository) {
+	public CredentialServiceImpl(CredentialRepository credentialRepository, final BCryptPasswordEncoder bCryptPasswordEncoder) {
 		this.credentialRepository = credentialRepository;
+		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
 	}
 	
 	@Override
@@ -36,11 +39,13 @@ public class CredentialServiceImpl implements CredentialService {
 	
 	@Override
 	public Credential save(Credential credential) {
+		credential.setPassword(this.bCryptPasswordEncoder.encode(credential.getPassword()));
 		return this.credentialRepository.save(credential);
 	}
 	
 	@Override
 	public Credential update(Credential credential) {
+		credential.setPassword(this.bCryptPasswordEncoder.encode(credential.getPassword()));
 		return this.credentialRepository.save(credential);
 	}
 	
