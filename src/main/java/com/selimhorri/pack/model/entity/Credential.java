@@ -2,6 +2,7 @@ package com.selimhorri.pack.model.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -36,7 +37,7 @@ public class Credential implements Serializable {
 	@Column(name = "is_enabled")
 	private Boolean isEnabled;
 	
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "employee_id")
 	private Employee employee;
 	
